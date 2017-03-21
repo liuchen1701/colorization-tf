@@ -1,4 +1,4 @@
-import tensorflow as tf 
+import tensorflow as tf
 import numpy as np
 from skimage.io import imread
 from skimage import color
@@ -16,6 +16,7 @@ num = 0
 
 for img_f in lists_f:
   img_f = img_f.strip()
+  #img_f = '/'.join(img_f.split('\\'))
   filename_lists.append(img_f)
 random.shuffle(filename_lists)
 
@@ -31,6 +32,7 @@ sess = tf.Session(config=config)
 
 for img_f in filename_lists:
   img_f = img_f.strip()
+  #print(img_f)
   img = imread(img_f)
   img = resize(img, (224, 224), preserve_range=True)
   if len(img.shape)!=3 or img.shape[2]!=3:
@@ -42,7 +44,7 @@ for img_f in filename_lists:
   for i in nd_index:
     i = int(i)
     probs[i] += 1
-  print(num)
+  #print(num)
   sys.stdout.flush()
   num += 1
 sess.close()

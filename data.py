@@ -7,7 +7,7 @@ import math
 import random
 import cv2
 import numpy as np
-from Queue import Queue
+from queue import Queue
 from threading import Thread as Process
 #from multiprocessing import Process,Queue
 import time
@@ -19,7 +19,7 @@ from skimage.transform import resize
 
 class DataSet(object):
   """TextDataSet
-  process text input file dataset 
+  process text input file dataset
   text file format:
     image_path
   """
@@ -33,7 +33,7 @@ class DataSet(object):
     if common_params:
       self.image_size = int(common_params['image_size'])
       self.batch_size = int(common_params['batch_size'])
-      
+
     if dataset_params:
       self.data_path = str(dataset_params['path'])
       self.thread_num = int(int(dataset_params['thread_num']) / 2)
@@ -44,7 +44,7 @@ class DataSet(object):
 
     self.batch_queue = Queue(maxsize=100)
 
-    self.record_list = []  
+    self.record_list = []
 
     # filling the record_list
     input_file = open(self.data_path, 'r')
@@ -83,8 +83,8 @@ class DataSet(object):
       self.record_point += 1
 
   def image_process(self, image):
-    """record process 
-    Args: record 
+    """record process
+    Args: record
     Returns:
       image: 3-D ndarray
     """
@@ -110,7 +110,7 @@ class DataSet(object):
     return image
 
   def record_customer(self):
-    """record queue's customer 
+    """record queue's customer
     """
     while True:
       item = self.record_queue.get()

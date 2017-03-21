@@ -86,7 +86,7 @@ class Solver(object):
       #saver1.restore(sess, './models/model.ckpt')
       #nilboy
       summary_writer = tf.summary.FileWriter(self.train_dir, sess.graph)
-      for step in xrange(self.max_steps):
+      for step in range(self.max_steps):
         start_time = time.time()
         t1 = time.time()
         data_l, gt_ab_313, prior_boost_nongray = self.dataset.batch()
@@ -106,7 +106,7 @@ class Solver(object):
                         'sec/batch)')
           print (format_str % (datetime.now(), step, loss_value,
                                examples_per_sec, sec_per_batch))
-        
+
         if step % 10 == 0:
           summary_str = sess.run(summary_op, feed_dict={self.data_l:data_l, self.gt_ab_313:gt_ab_313, self.prior_boost_nongray:prior_boost_nongray})
           summary_writer.add_summary(summary_str, step)
